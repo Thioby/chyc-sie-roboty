@@ -10,8 +10,9 @@ const _USERS_COLLECTION = "users";
 
 class FirebaseUserRepository implements UserRepository {
   final Firestore _firestore;
+  final FirebaseMessaging _firebaseMessaging;
 
-  FirebaseUserRepository(this._firestore);
+  FirebaseUserRepository(this._firestore, this._firebaseMessaging);
 
   @override
   Observable login(FirebaseUser firebaseUser) {
@@ -20,7 +21,7 @@ class FirebaseUserRepository implements UserRepository {
       if (document.exists) {
         return Observable.just(null);
       } else {
-        return Observable.fromFuture(FirebaseMessaging().getToken()).flatMap((token) {
+        return Observable.fromFuture(_firebaseMessaging.getToken()).flatMap((token) {
           var user = User(
             uid: firebaseUser.uid,
             name: firebaseUser.displayName,
