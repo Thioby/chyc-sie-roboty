@@ -13,18 +13,31 @@ import 'package:chyc_sie_roboty/widget/image_round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:rxdart/rxdart.dart';
 
 class HomePage extends StatefulWidget {
   final Function(SwipeType) swipeTypeCallback;
+  final Observable buttonNotifier;
 
-  const HomePage({Key key, @required this.swipeTypeCallback}) : super(key: key);
+  HomePage({Key key, @required this.swipeTypeCallback, @required this.buttonNotifier}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(buttonNotifier);
 }
 
 class _HomePageState extends BlocState<HomePage, HomeBloc> {
   final CardController _cardController = CardController();
+  final Observable buttonNotifier;
+
+  _HomePageState(this.buttonNotifier);
+
+  @override
+  void afterBlocInit() {
+    buttonNotifier.listen((_) {
+      bloc.dispatch(ChangeDataType());
+    });
+    super.afterBlocInit();
+  }
 
   @override
   Widget build(BuildContext context) => StreamBuilder(
@@ -36,10 +49,13 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     final state = snapshot.data;
 
     if (state is ShowLoadingOfferCards) {
+      widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView('Adam', _buildLoadingCardsView());
     } else if (state is ShowLoadingCourseCards) {
+      widget.swipeTypeCallback(SwipeType.COURSE);
       return _buildView('Adam', _buildLoadingCardsView());
     } else if (state is ShowOfferCards) {
+      widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
         'Adam',
         _buildOfferSwipeView(
@@ -48,6 +64,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
         ),
       );
     } else if (state is ShowCourseCards) {
+      widget.swipeTypeCallback(SwipeType.COURSE);
       return _buildView(
         'Adam',
         _buildOfferSwipeView(

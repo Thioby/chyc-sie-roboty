@@ -28,6 +28,7 @@ class OfferCard extends StatelessWidget {
               children: <Widget>[
                 Text(offer.companyName ?? "", style: AppTypography.offerCompanyTextStyle),
                 SizedBox(width: Dimens.S),
+                SvgPicture.asset(Images.STARS),
               ],
             ),
             Text(offer.offerName ?? "", style: AppTypography.offerTitleTextStyle),
@@ -63,7 +64,7 @@ class OfferCard extends StatelessWidget {
                 SizedBox(width: Dimens.S),
                 Text('Kliknij by zobaczyć więcej informacji', style: AppTypography.offerLabelTextStyle),
               ],
-            )
+            ),
           ],
         ),
       );

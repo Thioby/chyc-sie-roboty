@@ -5,6 +5,7 @@ import 'package:chyc_sie_roboty/presentation/home/home_event.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
 import 'package:chyc_sie_roboty/util/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeBloc extends Bloc {
