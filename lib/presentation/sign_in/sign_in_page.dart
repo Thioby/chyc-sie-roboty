@@ -1,4 +1,5 @@
 import 'package:chyc_sie_roboty/presentation/home/home_page.dart';
+import 'package:chyc_sie_roboty/presentation/main/main_page.dart';
 import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_bloc.dart';
 import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_state.dart';
 import 'package:chyc_sie_roboty/util/bloc_state.dart';
@@ -27,7 +28,7 @@ class _SignInState extends BlocState<SignInPage, SignInBloc> {
     if (name == "Home") {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+        MaterialPageRoute(builder: (BuildContext context) => MainPage()),
             (_) => false,
       );
     }

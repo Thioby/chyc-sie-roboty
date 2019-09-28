@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:chyc_sie_roboty/domain/data/offer.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_event.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
@@ -31,7 +32,7 @@ class HomeBloc extends Bloc {
 
     _dataSubscription?.cancel();
     _dataSubscription = Observable.timer(null, Duration(seconds: 2)).listen((_) {
-      _stateSubject.add(ShowOfferCards.from([]));
+      _stateSubject.add(ShowOfferCards.from(List<Offer>.generate(10, (i) => Offer())));
     });
   }
 
