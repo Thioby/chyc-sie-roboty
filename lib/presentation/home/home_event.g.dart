@@ -6,308 +6,153 @@ part of 'home_event.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$DiscardOffer extends DiscardOffer {
+class _$Discard extends Discard {
   @override
-  final int id;
+  final int index;
 
-  factory _$DiscardOffer([void Function(DiscardOfferBuilder) updates]) =>
-      (new DiscardOfferBuilder()..update(updates)).build();
+  factory _$Discard([void Function(DiscardBuilder) updates]) =>
+      (new DiscardBuilder()..update(updates)).build();
 
-  _$DiscardOffer._({this.id}) : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('DiscardOffer', 'id');
+  _$Discard._({this.index}) : super._() {
+    if (index == null) {
+      throw new BuiltValueNullFieldError('Discard', 'index');
     }
   }
 
   @override
-  DiscardOffer rebuild(void Function(DiscardOfferBuilder) updates) =>
+  Discard rebuild(void Function(DiscardBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  DiscardOfferBuilder toBuilder() => new DiscardOfferBuilder()..replace(this);
+  DiscardBuilder toBuilder() => new DiscardBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DiscardOffer && id == other.id;
+    return other is Discard && index == other.index;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, id.hashCode));
+    return $jf($jc(0, index.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('DiscardOffer')..add('id', id))
+    return (newBuiltValueToStringHelper('Discard')..add('index', index))
         .toString();
   }
 }
 
-class DiscardOfferBuilder
-    implements Builder<DiscardOffer, DiscardOfferBuilder> {
-  _$DiscardOffer _$v;
+class DiscardBuilder implements Builder<Discard, DiscardBuilder> {
+  _$Discard _$v;
 
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
+  int _index;
+  int get index => _$this._index;
+  set index(int index) => _$this._index = index;
 
-  DiscardOfferBuilder();
+  DiscardBuilder();
 
-  DiscardOfferBuilder get _$this {
+  DiscardBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
+      _index = _$v.index;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(DiscardOffer other) {
+  void replace(Discard other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$DiscardOffer;
+    _$v = other as _$Discard;
   }
 
   @override
-  void update(void Function(DiscardOfferBuilder) updates) {
+  void update(void Function(DiscardBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$DiscardOffer build() {
-    final _$result = _$v ?? new _$DiscardOffer._(id: id);
+  _$Discard build() {
+    final _$result = _$v ?? new _$Discard._(index: index);
     replace(_$result);
     return _$result;
   }
 }
 
-class _$AcceptOffer extends AcceptOffer {
+class _$Accept extends Accept {
   @override
-  final int id;
+  final int index;
 
-  factory _$AcceptOffer([void Function(AcceptOfferBuilder) updates]) =>
-      (new AcceptOfferBuilder()..update(updates)).build();
+  factory _$Accept([void Function(AcceptBuilder) updates]) =>
+      (new AcceptBuilder()..update(updates)).build();
 
-  _$AcceptOffer._({this.id}) : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('AcceptOffer', 'id');
+  _$Accept._({this.index}) : super._() {
+    if (index == null) {
+      throw new BuiltValueNullFieldError('Accept', 'index');
     }
   }
 
   @override
-  AcceptOffer rebuild(void Function(AcceptOfferBuilder) updates) =>
+  Accept rebuild(void Function(AcceptBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  AcceptOfferBuilder toBuilder() => new AcceptOfferBuilder()..replace(this);
+  AcceptBuilder toBuilder() => new AcceptBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AcceptOffer && id == other.id;
+    return other is Accept && index == other.index;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, id.hashCode));
+    return $jf($jc(0, index.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('AcceptOffer')..add('id', id))
+    return (newBuiltValueToStringHelper('Accept')..add('index', index))
         .toString();
   }
 }
 
-class AcceptOfferBuilder implements Builder<AcceptOffer, AcceptOfferBuilder> {
-  _$AcceptOffer _$v;
+class AcceptBuilder implements Builder<Accept, AcceptBuilder> {
+  _$Accept _$v;
 
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
+  int _index;
+  int get index => _$this._index;
+  set index(int index) => _$this._index = index;
 
-  AcceptOfferBuilder();
+  AcceptBuilder();
 
-  AcceptOfferBuilder get _$this {
+  AcceptBuilder get _$this {
     if (_$v != null) {
-      _id = _$v.id;
+      _index = _$v.index;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(AcceptOffer other) {
+  void replace(Accept other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$AcceptOffer;
+    _$v = other as _$Accept;
   }
 
   @override
-  void update(void Function(AcceptOfferBuilder) updates) {
+  void update(void Function(AcceptBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$AcceptOffer build() {
-    final _$result = _$v ?? new _$AcceptOffer._(id: id);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$AcceptCourse extends AcceptCourse {
-  @override
-  final int id;
-
-  factory _$AcceptCourse([void Function(AcceptCourseBuilder) updates]) =>
-      (new AcceptCourseBuilder()..update(updates)).build();
-
-  _$AcceptCourse._({this.id}) : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('AcceptCourse', 'id');
-    }
-  }
-
-  @override
-  AcceptCourse rebuild(void Function(AcceptCourseBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  AcceptCourseBuilder toBuilder() => new AcceptCourseBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is AcceptCourse && id == other.id;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, id.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('AcceptCourse')..add('id', id))
-        .toString();
-  }
-}
-
-class AcceptCourseBuilder
-    implements Builder<AcceptCourse, AcceptCourseBuilder> {
-  _$AcceptCourse _$v;
-
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
-
-  AcceptCourseBuilder();
-
-  AcceptCourseBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(AcceptCourse other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$AcceptCourse;
-  }
-
-  @override
-  void update(void Function(AcceptCourseBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$AcceptCourse build() {
-    final _$result = _$v ?? new _$AcceptCourse._(id: id);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$DiscardCourse extends DiscardCourse {
-  @override
-  final int id;
-
-  factory _$DiscardCourse([void Function(DiscardCourseBuilder) updates]) =>
-      (new DiscardCourseBuilder()..update(updates)).build();
-
-  _$DiscardCourse._({this.id}) : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('DiscardCourse', 'id');
-    }
-  }
-
-  @override
-  DiscardCourse rebuild(void Function(DiscardCourseBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  DiscardCourseBuilder toBuilder() => new DiscardCourseBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is DiscardCourse && id == other.id;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, id.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('DiscardCourse')..add('id', id))
-        .toString();
-  }
-}
-
-class DiscardCourseBuilder
-    implements Builder<DiscardCourse, DiscardCourseBuilder> {
-  _$DiscardCourse _$v;
-
-  int _id;
-  int get id => _$this._id;
-  set id(int id) => _$this._id = id;
-
-  DiscardCourseBuilder();
-
-  DiscardCourseBuilder get _$this {
-    if (_$v != null) {
-      _id = _$v.id;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(DiscardCourse other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$DiscardCourse;
-  }
-
-  @override
-  void update(void Function(DiscardCourseBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$DiscardCourse build() {
-    final _$result = _$v ?? new _$DiscardCourse._(id: id);
+  _$Accept build() {
+    final _$result = _$v ?? new _$Accept._(index: index);
     replace(_$result);
     return _$result;
   }

@@ -14,6 +14,10 @@ abstract class _$UserSerializer implements Serializer<User> {
     setMapValue(ret, 'uid', model.uid);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'isEmployer', model.isEmployer);
+    setMapValue(ret, 'courseLocalization', model.courseLocalization);
+    setMapValue(ret, 'courseType', model.courseType);
+    setMapValue(ret, 'showPaidCourses', model.showPaidCourses);
+    setMapValue(ret, 'showCoursesWithCert', model.showCoursesWithCert);
     return ret;
   }
 
@@ -24,6 +28,10 @@ abstract class _$UserSerializer implements Serializer<User> {
     obj.uid = map['uid'] as String;
     obj.name = map['name'] as String;
     obj.isEmployer = map['isEmployer'] as bool;
+    obj.courseLocalization = map['courseLocalization'] as String;
+    obj.courseType = map['courseType'] as String;
+    obj.showPaidCourses = map['showPaidCourses'] as bool;
+    obj.showCoursesWithCert = map['showCoursesWithCert'] as bool;
     return obj;
   }
 }

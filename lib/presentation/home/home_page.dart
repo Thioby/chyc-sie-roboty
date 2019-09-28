@@ -4,6 +4,7 @@ import 'package:chyc_sie_roboty/presentation/home/home_bloc.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_event.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/offer_card.dart';
+import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/images.dart';
@@ -14,6 +15,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 
 class HomePage extends StatefulWidget {
+  final Function(SwipeType) swipeTypeCallback;
+
+  const HomePage({Key key, @required this.swipeTypeCallback}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,12 +42,18 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     } else if (state is ShowOfferCards) {
       return _buildView(
         'Adam',
-        _buildOfferSwipeView((index) => OfferCard(offer: state.offers[index]), state.offers.length),
+        _buildOfferSwipeView(
+          (index) => OfferCard(offer: state.offers[index]),
+          state.offers.length,
+        ),
       );
     } else if (state is ShowCourseCards) {
       return _buildView(
         'Adam',
-        _buildOfferSwipeView((index) => CourseCard(course: state.courses[index]), state.courses.length),
+        _buildOfferSwipeView(
+          (index) => CourseCard(course: state.courses[index]),
+          state.courses.length,
+        ),
       );
     }
 
@@ -62,7 +73,11 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
         ),
       );
 
-  Widget _buildOfferSwipeView(Widget Function(int) cardBuilder, int size) => Column(
+  Widget _buildOfferSwipeView(
+    Widget Function(int) cardBuilder,
+    int size,
+  ) =>
+      Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
@@ -83,9 +98,11 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
                     totalNum: size,
                     swipeCompleteCallback: (orientation, index) {
                       if (orientation != CardSwipeOrientation.RECOVER) {
-                        bloc.dispatch(DiscardOffer.from(index));
-                      } else {
-                        bloc.dispatch(AcceptOffer.from(index));
+                        if (orientation == CardSwipeOrientation.LEFT) {
+                          bloc.dispatch(Discard.from(index));
+                        } else {
+                          bloc.dispatch(Accept.from(index));
+                        }
                       }
                     },
                   ),

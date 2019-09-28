@@ -4,44 +4,24 @@ part 'home_event.g.dart';
 
 abstract class HomeEvent {}
 
-abstract class DiscardOffer implements Built<DiscardOffer, DiscardOfferBuilder>, HomeEvent {
-  DiscardOffer._();
+abstract class Discard implements Built<Discard, DiscardBuilder>, HomeEvent {
+  Discard._();
 
-  int get id;
+  int get index;
 
-  factory DiscardOffer([updates(DiscardOfferBuilder b)]) = _$DiscardOffer;
+  factory Discard([updates(DiscardBuilder b)]) = _$Discard;
 
-  static DiscardOffer from(int id) => DiscardOffer((b) => b..id = id);
+  static Discard from(int index) => Discard((b) => b..index = index);
 }
 
-abstract class AcceptOffer implements Built<AcceptOffer, AcceptOfferBuilder>, HomeEvent {
-  AcceptOffer._();
+abstract class Accept implements Built<Accept, AcceptBuilder>, HomeEvent {
+  Accept._();
 
-  int get id;
+  int get index;
 
-  factory AcceptOffer([updates(AcceptOfferBuilder b)]) = _$AcceptOffer;
+  factory Accept([updates(AcceptBuilder b)]) = _$Accept;
 
-  static AcceptOffer from(int id) => AcceptOffer((b) => b..id = id);
-}
-
-abstract class AcceptCourse implements Built<AcceptCourse, AcceptCourseBuilder>, HomeEvent {
-  AcceptCourse._();
-
-  int get id;
-
-  factory AcceptCourse([updates(AcceptCourseBuilder b)]) = _$AcceptCourse;
-
-  static AcceptCourse from(int id) => AcceptCourse((b) => b..id = id);
-}
-
-abstract class DiscardCourse implements Built<DiscardCourse, DiscardCourseBuilder>, HomeEvent {
-  DiscardCourse._();
-
-  int get id;
-
-  factory DiscardCourse([updates(DiscardCourseBuilder b)]) = _$DiscardCourse;
-
-  static DiscardCourse from(int id) => DiscardCourse((b) => b..id = id);
+  static Discard from(int index) => Discard((b) => b..index = index);
 }
 
 abstract class ChangeDataType implements Built<ChangeDataType, ChangeDataTypeBuilder>, HomeEvent {
