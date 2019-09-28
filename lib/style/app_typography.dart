@@ -46,4 +46,10 @@ class AppTypography {
     color: Colors.white30,
     fontWeight: FontWeight.w900,
   );
+
+  static const offerSkillTextStyle = TextStyle(
+    fontSize: 12,
+    color: AppColors.azure,
+    fontWeight: FontWeight.w700,
+  );
 }
