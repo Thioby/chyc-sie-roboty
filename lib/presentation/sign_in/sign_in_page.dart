@@ -1,8 +1,8 @@
-import 'package:chyc_sie_roboty/infrastructure/auth/firebase_auth_repository.dart';
-import 'package:chyc_sie_roboty/presentation/sign_in/google_sign_in.dart';
+import 'package:chyc_sie_roboty/presentation/home/home_page.dart';
+import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_bloc.dart';
+import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_state.dart';
+import 'package:chyc_sie_roboty/util/bloc_state.dart';
 import 'package:chyc_sie_roboty/widget/filled_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:chyc_sie_roboty/style/image.dart';
@@ -12,15 +12,40 @@ class SignInPage extends StatefulWidget {
   State createState() => _SignInState();
 }
 
-class _SignInState extends State<SignInPage> {
+class _SignInState extends BlocState<SignInPage, SignInBloc> {
+
+  @override
+  void afterBlocInit() {
+    bloc.route.listen((name) => _navigate(name));
+    super.afterBlocInit();
+  }
+  void _signIn() {
+    bloc.dispatch(SignInEvent.SignIn);
+  }
+
+  void _navigate(String name) {
+    if (name == "Home") {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+            (_) => false,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
-          child: _buildColumn(),
+          child: StreamBuilder(
+            stream: bloc.stream,
+            builder: (context, snapshot) {
+              return _mapStateToView(snapshot.data);
+            },
+          ),
         ),
       );
 
-  Widget _buildColumn() => Column(
+  Widget _buildColumn(Widget bottomWidget) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(height: 57),
@@ -38,19 +63,35 @@ class _SignInState extends State<SignInPage> {
           ),
           Padding(
             padding: EdgeInsets.only(left: 38.0, right: 38.0),
-            child: FilledButton(
-              title: "Zaloguj",
-              enabled: true,
-            ),
-          ),
-          SizedBox(height: 16),
-          Padding(
-            padding: EdgeInsets.only(left: 38.0, right: 38.0),
-            child: FilledButton(
-              title: "Utwórz konto",
-            ),
+            child: bottomWidget,
           ),
           SizedBox(height: 57)
         ],
       );
+
+  Widget _mapStateToView(SignInState state) {
+    switch (state) {
+      case SignInState.Loading:
+        return _buildColumn(Center(
+          child: CircularProgressIndicator(),
+        ));
+      case SignInState.Success:
+        return _buildColumn(FilledButton(
+          title: "Wejdź do aplikacji",
+          onPressed: _signIn,
+        ));
+      case SignInState.Error:
+        return _buildColumn(FilledButton(
+          title: "Wejdź do aplikacji",
+          onPressed: _signIn,
+        ));
+      case SignInState.Idle:
+        return _buildColumn(FilledButton(
+          title: "Wejdź do aplikacji",
+          onPressed: _signIn,
+        ));
+    }
+    ;
+    return Container();
+  }
 }
