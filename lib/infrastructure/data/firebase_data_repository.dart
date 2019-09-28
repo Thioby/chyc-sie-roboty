@@ -10,8 +10,9 @@ class FirebaseDataRepository extends DataRepository {
   FirebaseDataRepository(this._firestore);
 
   @override
-  Observable<List<Offer>> offers() => Observable(_firestore.collection('works').snapshots()).flatMap(
-      (offers) => Observable.just(offers.documents.map((doc) => OfferSerializer().fromMap(doc.data)).toList()));
+  Observable<List<Offer>> offers() =>
+      Observable(_firestore.collection('works').snapshots()).flatMap((offers) => Observable.just(
+          offers.documents.map((doc) => OfferSerializer().fromMap(doc.data)..id = doc.documentID).toList()));
 
   @override
   Observable<List<Course>> courses() {}

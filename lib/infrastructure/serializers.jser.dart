@@ -11,7 +11,9 @@ abstract class _$UserSerializer implements Serializer<User> {
   Map<String, dynamic> toMap(User model) {
     if (model == null) return null;
     Map<String, dynamic> ret = <String, dynamic>{};
+    setMapValue(ret, 'isLogged', model.isLogged);
     setMapValue(ret, 'uid', model.uid);
+    setMapValue(ret, 'pushToken', model.pushToken);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'isEmployer', model.isEmployer);
     setMapValue(ret, 'courseLocalization', model.courseLocalization);
@@ -25,7 +27,9 @@ abstract class _$UserSerializer implements Serializer<User> {
   User fromMap(Map map) {
     if (map == null) return null;
     final obj = User();
+    obj.isLogged = map['isLogged'] as bool;
     obj.uid = map['uid'] as String;
+    obj.pushToken = map['pushToken'] as String;
     obj.name = map['name'] as String;
     obj.isEmployer = map['isEmployer'] as bool;
     obj.courseLocalization = map['courseLocalization'] as String;

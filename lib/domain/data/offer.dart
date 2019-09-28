@@ -3,7 +3,7 @@ import 'package:jaguar_serializer/jaguar_serializer.dart';
 part 'offer.jser.dart';
 
 class Offer {
-  final String id;
+  String id;
   final List<String> benefits;
   final String companyName;
   final String offerName;
