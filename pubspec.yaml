@@ -37,6 +37,7 @@ dependencies:
   firebase_storage: ^3.0.0
   fimber: ^0.3.2
   jaguar_retrofit: ^2.8.6
+  flutter_tindercard: ^0.1.8
 
 dev_dependencies:
   flutter_test:
@@ -58,8 +59,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+    # To add assets to your application, add an assets section, like this:
   assets:
+    - images/ic_info.svg
+    - images/bottom_navigation.svg
+    - images/ic_filter.svg
+    - images/ic_cancel.svg
+    - images/ic_revert.svg
+    - images/ic_heart.svg
     - images/logo_text.svg
     - images/welcome_background.svg
 
