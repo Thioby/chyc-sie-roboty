@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "503908903810",
+    "firebase_url": "https://chycsieroboty.firebaseio.com",
+    "project_id": "chycsieroboty",
+    "storage_bucket": "chycsieroboty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503908903810:android:e7742f4a25b88404a43d9b",
+        "android_client_info": {
+          "package_name": "pl.chycsieroboty.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503908903810-uipq8ra1i4ueuhi7uqla7upqrofbvvap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.chycsieroboty.app",
+            "certificate_hash": "2ea856be4762920abb494c089b7bdac8e3aea076"
+          }
+        },
+        {
+          "client_id": "503908903810-droojkgbrinavjq3i4du2cir9o7llq4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd4OPwrd65bltnx3KwGVl9uH4BDQg-s1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503908903810-droojkgbrinavjq3i4du2cir9o7llq4q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "503908903810-h5eo4r07akfvfvp3i27ec8od2v2c22p9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pl.chycsieroboty.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
