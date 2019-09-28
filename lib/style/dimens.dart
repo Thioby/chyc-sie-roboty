@@ -12,4 +12,6 @@ class Dimens {
   static const XC = 64.0;
   static const XXC = 72.0;
   static const XXXC = 80.0;
+  static const BUTTON_HEIGHT = 55.0;
+  static const CORNER = 6.0;
 }
