@@ -3,6 +3,7 @@ import 'package:built_value/serializer.dart';
 
 class User {
   String uid;
+  String pushToken;
   String name;
   bool isEmployer;
   @nullable
@@ -16,6 +17,7 @@ class User {
 
   User(
       {this.uid,
+      this.pushToken,
       this.name,
       this.isEmployer,
       this.courseLocalization,
