@@ -14,13 +14,19 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Observable login(FirebaseUser firebaseUser) {
-    var user = User(
-      uid: firebaseUser.uid,
-      name: firebaseUser.displayName,
-      isEmployer: false,
-    );
-
-    return Observable.just(_firestore.collection(_USERS_COLLECTION).document(user.uid)).flatMap((document) =>
-        Observable.fromFuture(document.setData(UserSerializer().toMap(user)).timeout(Duration(seconds: 15))));
+    return Observable.fromFuture(_firestore.collection(_USERS_COLLECTION).document(firebaseUser.uid).get())
+        .flatMap((document) {
+      if (document.exists) {
+        return Observable.just(null);
+      } else {
+        var user = User(
+          uid: firebaseUser.uid,
+          name: firebaseUser.displayName,
+          isEmployer: false,
+        );
+        return Observable.fromFuture(
+            document.reference.setData(UserSerializer().toMap(user)).timeout(Duration(seconds: 15)));
+      }
+    });
   }
 }
