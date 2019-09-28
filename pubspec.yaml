@@ -37,6 +37,7 @@ dependencies:
   firebase_storage: ^3.0.0
   fimber: ^0.3.2
   jaguar_retrofit: ^2.8.6
+  firebase_messaging: ^5.1.6
   flutter_tindercard: ^0.1.8
 
 dev_dependencies:

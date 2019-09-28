@@ -3,14 +3,16 @@ import 'package:chyc_sie_roboty/domain/auth/user_repository.dart';
 import 'package:chyc_sie_roboty/infrastructure/serializers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:rxdart/src/observables/observable.dart';
 
 const _USERS_COLLECTION = "users";
 
 class FirebaseUserRepository implements UserRepository {
   final Firestore _firestore;
+  final FirebaseMessaging _firebaseMessaging;
 
-  FirebaseUserRepository(this._firestore);
+  FirebaseUserRepository(this._firestore, this._firebaseMessaging);
 
   @override
   Observable login(FirebaseUser firebaseUser) {
@@ -19,13 +21,16 @@ class FirebaseUserRepository implements UserRepository {
       if (document.exists) {
         return Observable.just(null);
       } else {
-        var user = User(
-          uid: firebaseUser.uid,
-          name: firebaseUser.displayName,
-          isEmployer: false,
-        );
-        return Observable.fromFuture(
-            document.reference.setData(UserSerializer().toMap(user)).timeout(Duration(seconds: 15)));
+        return Observable.fromFuture(_firebaseMessaging.getToken()).flatMap((token) {
+          var user = User(
+            uid: firebaseUser.uid,
+            name: firebaseUser.displayName,
+            isEmployer: false,
+            pushToken: token,
+          );
+          return Observable.fromFuture(
+              document.reference.setData(UserSerializer().toMap(user)).timeout(Duration(seconds: 15)));
+        });
       }
     });
   }
