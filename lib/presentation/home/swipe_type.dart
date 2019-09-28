@@ -1,0 +1,4 @@
+enum SwipeType {
+  OFFER,
+  COURSE,
+}
