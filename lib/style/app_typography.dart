@@ -52,6 +52,21 @@ class AppTypography {
     color: AppColors.azure,
     fontWeight: FontWeight.w700,
   );
+  static const screenTitle = TextStyle(
+    fontSize: 22,
+    color: AppColors.twilight,
+    fontWeight: FontWeight.w800,
+  );
+  static const screenSubTitle = TextStyle(
+    fontSize: 14,
+    color: AppColors.twilightHalfTransparent,
+    fontWeight: FontWeight.w600,
+  );
+  static const formLabel = TextStyle(
+    fontSize: 14,
+    color: AppColors.twilight,
+    fontWeight: FontWeight.bold,
+  );
 
   static const buttonTextStyle = TextStyle(
     fontSize: 12,
