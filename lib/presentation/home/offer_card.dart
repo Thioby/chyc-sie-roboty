@@ -40,22 +40,24 @@ class OfferCard extends StatelessWidget {
             Text('Wymagane umiejętności:', style: AppTypography.offerSkillsTextStyle),
             SizedBox(height: Dimens.S),
             Expanded(
-              child: GridView.extent(
-                childAspectRatio: 4,
-                crossAxisSpacing: Dimens.S,
-                mainAxisSpacing: Dimens.S,
-                maxCrossAxisExtent: MediaQuery.of(context).size.width / 2,
-                children: <Widget>[
-                  // ignore: sdk_version_ui_as_code
-                  ...offer.requiredSkills.map(
-                    (skill) => Container(
-                      color: AppColors.azure.withOpacity(0.1),
-                      padding: const EdgeInsets.symmetric(horizontal: Dimens.M, vertical: Dimens.S),
-                      child: Center(child: Text(skill, style: AppTypography.offerSkillTextStyle)),
-                    ),
-                  )
-                ],
-              ),
+              child: offer.requiredSkills != null
+                  ? GridView.extent(
+                      childAspectRatio: 4,
+                      crossAxisSpacing: Dimens.S,
+                      mainAxisSpacing: Dimens.S,
+                      maxCrossAxisExtent: MediaQuery.of(context).size.width / 2,
+                      children: <Widget>[
+                        // ignore: sdk_version_ui_as_code
+                        ...offer.requiredSkills.map(
+                          (skill) => Container(
+                            color: AppColors.azure.withOpacity(0.1),
+                            padding: const EdgeInsets.symmetric(horizontal: Dimens.M, vertical: Dimens.S),
+                            child: Center(child: Text(skill, style: AppTypography.offerSkillTextStyle)),
+                          ),
+                        )
+                      ],
+                    )
+                  : Container(),
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

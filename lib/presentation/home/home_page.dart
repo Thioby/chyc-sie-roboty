@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BlocState<HomePage, HomeBloc> {
-  final CardController _cardController = CardController();
+  CardController _cardController = CardController();
   final Observable buttonNotifier;
 
   _HomePageState(this.buttonNotifier);
@@ -59,7 +59,10 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
       return _buildView(
         'Adam',
         _buildOfferSwipeView(
-          (index) => OfferCard(offer: state.offers[index]),
+          (index) {
+            print('offer index = $index');
+            return OfferCard(offer: state.offers[index]);
+          },
           state.offers.length,
         ),
       );
@@ -68,7 +71,10 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
       return _buildView(
         'Adam',
         _buildOfferSwipeView(
-          (index) => CourseCard(course: state.courses[index]),
+          (index) {
+            print('course index = $index');
+            return CourseCard(course: state.courses[index]);
+          },
           state.courses.length,
         ),
       );
@@ -93,54 +99,56 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
   Widget _buildOfferSwipeView(
     Widget Function(int) cardBuilder,
     int size,
-  ) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Dimens.S),
-                child: Container(
-                  child: TinderSwapCard(
-                    animDuration: 300,
-                    stackNum: 3,
-                    maxWidth: MediaQuery.of(context).size.width * 0.9,
-                    minWidth: MediaQuery.of(context).size.width * 0.8,
-                    maxHeight: MediaQuery.of(context).size.height * 0.4,
-                    minHeight: MediaQuery.of(context).size.height * 0.35,
-                    orientation: AmassOrientation.BOTTOM,
-                    cardController: _cardController,
-                    cardBuilder: (context, index) => cardBuilder(index),
-                    totalNum: size,
-                    swipeCompleteCallback: (orientation, index) {
-                      if (orientation != CardSwipeOrientation.RECOVER) {
-                        if (orientation == CardSwipeOrientation.LEFT) {
-                          bloc.dispatch(Discard.from(index));
-                        } else {
-                          bloc.dispatch(Accept.from(index));
-                        }
+  ) {
+    print('size $size');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Dimens.S),
+              child: Container(
+                child: TinderSwapCard(
+                  animDuration: 300,
+                  stackNum: 3,
+                  maxWidth: MediaQuery.of(context).size.width * 0.9,
+                  minWidth: MediaQuery.of(context).size.width * 0.8,
+                  maxHeight: MediaQuery.of(context).size.height * 0.4,
+                  minHeight: MediaQuery.of(context).size.height * 0.35,
+                  orientation: AmassOrientation.BOTTOM,
+                  cardController: _cardController,
+                  cardBuilder: (context, index) => cardBuilder(index),
+                  totalNum: size,
+                  swipeCompleteCallback: (orientation, index) {
+                    if (orientation != CardSwipeOrientation.RECOVER) {
+                      if (orientation == CardSwipeOrientation.LEFT) {
+                        bloc.dispatch(Discard.from(index));
+                      } else {
+                        bloc.dispatch(Accept.from(index));
                       }
-                    },
-                  ),
+                    }
+                  },
                 ),
               ),
             ),
           ),
-          SizedBox(height: 24),
-          size > 0 ? _buildCardControlsRow() : Container(),
-          SizedBox(height: 40),
-        ],
-      );
+        ),
+        SizedBox(height: 24),
+        size > 0 ? _buildCardControlsRow() : Container(),
+        SizedBox(height: 40),
+      ],
+    );
+  }
 
   Row _buildCardControlsRow() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          RoundImageButton(image: SvgPicture.asset(Images.CANCEL), onTap: () => _cardController.triggerLeft()),
+          RoundImageButton(image: SvgPicture.asset(Images.CANCEL), onTap: () => _cardController?.triggerLeft()),
           SizedBox(width: 48),
           RoundImageButton(image: SvgPicture.asset(Images.REVERT), onTap: () {}),
           SizedBox(width: 48),
-          RoundImageButton(image: SvgPicture.asset(Images.HEART), onTap: () => _cardController.triggerRight()),
+          RoundImageButton(image: SvgPicture.asset(Images.HEART), onTap: () => _cardController?.triggerRight()),
         ],
       );
 

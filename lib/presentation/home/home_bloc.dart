@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'package:chyc_sie_roboty/domain/data/course.dart';
 import 'package:chyc_sie_roboty/domain/data/data_repository.dart';
 import 'package:chyc_sie_roboty/domain/data/offer.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_event.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
 import 'package:chyc_sie_roboty/util/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeBloc extends Bloc {
@@ -19,6 +19,8 @@ class HomeBloc extends Bloc {
   SwipeType _swipeType = SwipeType.OFFER;
   List<Offer> _currentOffers = [];
   List<Offer> _swipedOffers = [];
+  List<Course> _currentCourses = [];
+  List<Course> _swipedCourses = [];
 
   Function(HomeEvent) get dispatch => _eventSubject.sink.add;
 
@@ -43,14 +45,27 @@ class HomeBloc extends Bloc {
         _currentOffers = _filterOffers(offers);
         _stateSubject.add(ShowOfferCards.from(_currentOffers));
       });
+    } else if (_swipeType == SwipeType.COURSE) {
+      _dataSubscription = _dataRepository.courses().listen((courses) {
+        _currentCourses = _filterCourses(courses);
+        _stateSubject.add(ShowCourseCards.from(_currentCourses));
+      });
     }
   }
 
   _mapEventToState(HomeState lastState, HomeEvent event) {
     if (event is Discard) {
-      _filterOutOffer();
+      if (_swipeType == SwipeType.OFFER) {
+        _filterOutOffer();
+      } else {
+        _filterOutCourse();
+      }
     } else if (event is Accept) {
-      _filterOutOffer();
+      if (_swipeType == SwipeType.OFFER) {
+        _filterOutOffer();
+      } else {
+        _filterOutCourse();
+      }
     } else if (event is ChangeDataType) {
       if (_swipeType == SwipeType.OFFER) {
         _swipeType = SwipeType.COURSE;
@@ -68,9 +83,21 @@ class HomeBloc extends Bloc {
     return offer;
   }
 
+  Course _filterOutCourse() {
+    final course = _currentCourses.removeAt(0);
+    _swipedCourses.add(course);
+    _stateSubject.add(ShowCourseCards.from(_currentCourses));
+    return course;
+  }
+
   Iterable<Offer> _filterOffers(List<Offer> offers) => offers
       .where(
           (offer) => _swipedOffers.firstWhere((swipedOffer) => swipedOffer.id == offer.id, orElse: () => null) == null)
+      .toList();
+
+  Iterable<Course> _filterCourses(List<Course> courses) => courses
+      .where((course) =>
+          _swipedCourses.firstWhere((swipedCourse) => swipedCourse.id == course.id, orElse: () => null) == null)
       .toList();
 
   @override
