@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
-    <g fill="none" fill-rule="nonzero">
-        <circle cx="28" cy="28" r="28" fill="#FFF"/>
-        <path fill="#F73A3A" stroke="#F73A3A" stroke-width=".6" d="M27.264 28.073l-8.09 8.086a.575.575 0 1 0 .814.813l8.15-8.147 8.15 8.147a.573.573 0 0 0 .814 0 .575.575 0 0 0 0-.813l-8.09-8.086 8.096-8.092a.575.575 0 1 0-.814-.813l-8.155 8.153-8.157-8.152a.576.576 0 0 0-.813.813l8.095 8.091z"/>
+    <g fill="none" fill-rule="evenodd">
+        <circle cx="28" cy="28" r="28" fill="#F73A3A" fill-rule="nonzero"/>
+        <path stroke="#FFF" stroke-linecap="round" stroke-width="2" d="M20 20l15.158 15.158M35.433 20L20.275 35.158"/>
     </g>
 </svg>

@@ -73,6 +73,7 @@ flutter:
     - images/welcome_background.svg
     - images/ic_stars.svg
     - images/bottom_info_icon.svg
+    - images/avatar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
