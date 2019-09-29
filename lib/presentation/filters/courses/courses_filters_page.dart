@@ -1,10 +1,12 @@
+import 'package:chyc_sie_roboty/presentation/filters/courses/course_filters_bloc.dart';
+import 'package:chyc_sie_roboty/presentation/filters/courses/course_filters_event.dart';
 import 'package:chyc_sie_roboty/presentation/filters/courses/select_categories_page.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/strings.dart';
+import 'package:chyc_sie_roboty/util/bloc_state.dart';
 import 'package:chyc_sie_roboty/widget/labeled_button.dart';
-import 'package:chyc_sie_roboty/widget/labeled_dropdown.dart';
 import 'package:chyc_sie_roboty/widget/labeled_input.dart';
 import 'package:chyc_sie_roboty/widget/two_colors_button.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,8 @@ class CoursesFiltersPage extends StatefulWidget {
   _CoursesFiltersPageState createState() => _CoursesFiltersPageState();
 }
 
-class _CoursesFiltersPageState extends State<CoursesFiltersPage> {
+class _CoursesFiltersPageState extends BlocState<CoursesFiltersPage, CourseFiltersBloc> {
   String _selected = categories()[0];
-  String _localization;
   final TextEditingController _controller = new TextEditingController();
 
   @override
@@ -42,11 +43,6 @@ class _CoursesFiltersPageState extends State<CoursesFiltersPage> {
                       label: Strings.localization(context),
                       hint: Strings.filterInput(context),
                       controller: _controller,
-                      onTextChange: (text) {
-                        setState(() {
-                          _localization = text;
-                        });
-                      },
                     ),
                     SizedBox(height: Dimens.M),
                     LabeledButton(
@@ -71,11 +67,10 @@ class _CoursesFiltersPageState extends State<CoursesFiltersPage> {
                 leftClick: () {
                   setState(() {
                     _selected = categories()[0];
-                    _localization = null;
                     _controller.clear();
                   });
                 },
-                rightClick: () {},
+                rightClick: () => bloc.dispatch(UpdateFilters.from(_controller.text, _selected)),
               ),
             )
           ],

@@ -9,8 +9,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeAppBar extends StatelessWidget {
   final String userName;
+  final Function onFilterClick;
 
-  const HomeAppBar({Key key, @required this.userName}) : super(key: key);
+  const HomeAppBar({Key key, @required this.userName, this.onFilterClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -45,21 +46,22 @@ class HomeAppBar extends StatelessWidget {
             bottom: 24,
             left: 24,
             right: 24,
-            child: Container(
-              height: 48,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.white,
-              ),
-              child: Row(
-                children: <Widget>[
-                  SizedBox(width: Dimens.M),
-                  Expanded(
-                    child: Text('Filtruj ogłoszenia'),
-                  ),
-                  SvgPicture.asset(Images.FILTER),
-                  SizedBox(width: Dimens.M),
-                ],
+            child: InkWell(
+              onTap: () => onFilterClick(),
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(width: Dimens.M),
+                    Expanded(child: Text('Filtruj ogłoszenia')),
+                    SvgPicture.asset(Images.FILTER),
+                    SizedBox(width: Dimens.M),
+                  ],
+                ),
               ),
             ),
           )
