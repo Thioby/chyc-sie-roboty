@@ -1,7 +1,9 @@
+import 'package:chyc_sie_roboty/presentation/filters/courses/select_categories_page.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/strings.dart';
+import 'package:chyc_sie_roboty/widget/labeled_button.dart';
 import 'package:chyc_sie_roboty/widget/labeled_dropdown.dart';
 import 'package:chyc_sie_roboty/widget/labeled_input.dart';
 import 'package:chyc_sie_roboty/widget/two_colors_button.dart';
@@ -47,23 +49,12 @@ class _CoursesFiltersPageState extends State<CoursesFiltersPage> {
                       },
                     ),
                     SizedBox(height: Dimens.M),
-                    LabeledDropdown(
+                    LabeledButton(
                       label: Strings.courseType(context),
                       selected: _selected,
-                      onChanged: (value) {
-                        setState(() {
-                          _selected = value;
-                        });
+                      onTap: () {
+                        selectCategory(context);
                       },
-                      items: categories().map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: Dimens.S),
-                            child: Text(value),
-                          ),
-                        );
-                      }).toList(),
                     ),
                   ],
                 ),
@@ -91,6 +82,17 @@ class _CoursesFiltersPageState extends State<CoursesFiltersPage> {
         ),
       ),
     );
+  }
+
+  Future selectCategory(BuildContext context) async {
+    String newSelected = await Navigator.push(
+      context,
+      // Create the SelectionScreen in the next step.
+      MaterialPageRoute(builder: (context) => SelectCategoryPage()),
+    );
+    setState(() {
+      _selected = newSelected;
+    });
   }
 
   Container _buildTop(BuildContext context) {
