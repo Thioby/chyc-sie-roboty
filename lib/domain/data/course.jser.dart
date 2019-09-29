@@ -18,6 +18,8 @@ abstract class _$CourseSerializer implements Serializer<Course> {
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'createdBy', model.createdBy);
     setMapValue(ret, 'timestamp', model.timestamp);
+    setMapValue(ret, 'additionalInfo',
+        codeIterable(model.additionalInfo, (val) => val as String));
     return ret;
   }
 
@@ -31,7 +33,10 @@ abstract class _$CourseSerializer implements Serializer<Course> {
         map['description'] as String ?? getJserDefault('description'),
         map['name'] as String ?? getJserDefault('name'),
         map['createdBy'] as String ?? getJserDefault('createdBy'),
-        map['timestamp'] as int ?? getJserDefault('timestamp'));
+        map['timestamp'] as int ?? getJserDefault('timestamp'),
+        codeIterable<String>(
+                map['additionalInfo'] as Iterable, (val) => val as String) ??
+            getJserDefault('additionalInfo'));
     obj.id = map['id'] as String;
     return obj;
   }

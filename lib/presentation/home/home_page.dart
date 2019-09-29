@@ -1,4 +1,7 @@
 import 'package:chyc_sie_roboty/presentation/filters/courses/courses_filters_page.dart';
+import 'package:chyc_sie_roboty/domain/data/course.dart';
+import 'package:chyc_sie_roboty/presentation/course_detail/course_detail_page.dart';
+import 'package:chyc_sie_roboty/presentation/course_detail/course_detail_result.dart';
 import 'package:chyc_sie_roboty/presentation/home/course_card.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_app_bar.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_bloc.dart';
@@ -108,7 +111,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
 
   Widget _buildCourseView(ShowCourseCards state) => state.courses.length > 0
       ? _buildOfferSwipeView(
-          (index) => CourseCard(course: state.courses[index]),
+          (index) => CourseCard(course: state.courses[index], onClick: _courseClick),
           state.courses.length,
         )
       : Center(
@@ -135,7 +138,6 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     Widget Function(int) cardBuilder,
     int size,
   ) {
-    print('size $size');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -211,5 +213,24 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
     );
+  }
+
+  void _courseClick(Course course) async {
+    final result =
+        await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CourseDetailPage(course)));
+    _handleState(result);
+  }
+
+  void _handleState(CourseDetailResult result) {
+    switch (result) {
+      case CourseDetailResult.delete:
+        _cardController.triggerLeft();
+        break;
+      case CourseDetailResult.apply:
+        _cardController.triggerRight();
+        break;
+      case CourseDetailResult.none:
+        break;
+    }
   }
 }
