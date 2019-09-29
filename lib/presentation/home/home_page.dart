@@ -58,7 +58,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     if (state is ShowLoadingOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
-        'Adam',
+        state.userName,
         _buildLoadingCardsView(),
         "loadingOffer",
         _onOffersFilterClick,
@@ -66,7 +66,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     } else if (state is ShowLoadingCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
       return _buildView(
-        'Adam',
+        state.userName,
         _buildLoadingCardsView(),
         "loadingCourse",
         _onCourseFilterClick,
@@ -74,7 +74,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     } else if (state is ShowOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
-        'Adam',
+        state.userName,
         _buildOfferView(state),
         SwipeType.OFFER.toString(),
         _onOffersFilterClick,
@@ -82,7 +82,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     } else if (state is ShowCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
       return _buildView(
-        'Adam',
+        state.userName,
         _buildCourseView(state),
         SwipeType.COURSE.toString(),
         _onCourseFilterClick,

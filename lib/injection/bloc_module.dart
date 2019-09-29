@@ -6,7 +6,7 @@ import 'package:injector/injector.dart';
 
 registerBlocModules(Injector injector) {
   injector
-    ..registerDependency((injector) => HomeBloc(injector.getDependency()))
+    ..registerDependency((injector) => HomeBloc(injector.getDependency(), injector.getDependency()))
     ..registerDependency((injector) => SignInBloc(injector.getDependency()))
     ..registerDependency((injector) => CourseFiltersBloc(injector.getDependency()))
     ..registerDependency((injector) => MainBloc());
