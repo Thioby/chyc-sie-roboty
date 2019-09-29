@@ -6,4 +6,5 @@ class Images {
   static const REVERT = "images/ic_revert.svg";
   static const HEART = "images/ic_heart.svg";
   static const STARS = "images/ic_stars.svg";
+  static const BOTTOM_INFO_ICON = "images/bottom_info_icon.svg";
 }
