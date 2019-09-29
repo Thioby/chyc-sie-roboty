@@ -2,7 +2,7 @@ import 'dart:ui';
 
 class AppColors {
   static const Color shadowGrey = Color(0x32001c51);
-  static const Color azure = Color(0xff00a8ff);
+  static const Color azure = Color(0xff0dacff);
   static const Color backgroundColor = Color(0xffecf5fc);
   static const Color twilight = Color(0xff4b5184);
   static const Color twilightHalfTransparent = Color(0x804b5184);
