@@ -39,6 +39,7 @@ dependencies:
   jaguar_retrofit: ^2.8.6
   firebase_messaging: ^5.1.6
   flutter_tindercard: ^0.1.8
+  google_maps_flutter: ^0.5.21+6
   flutter_local_notifications: ^0.8.3
 
 dev_dependencies:

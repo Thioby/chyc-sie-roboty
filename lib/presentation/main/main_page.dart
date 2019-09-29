@@ -95,3 +95,19 @@ class _MainPageState extends BlocState<MainPage, MainBloc> {
     return Container();
   }
 }
+
+Widget changeWidget(int page) {
+  switch (page) {
+    case 0:
+      return HomePage(
+        swipeTypeCallback: (type) {},
+      );
+      break;
+
+    case 2:
+      return MapViewPage();
+      break;
+  }
+
+  return Container();
+}
