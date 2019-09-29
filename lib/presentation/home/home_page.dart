@@ -9,6 +9,7 @@ import 'package:chyc_sie_roboty/presentation/home/home_event.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/offer_card.dart';
 import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
+import 'package:chyc_sie_roboty/presentation/work/work_details_page.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
@@ -100,7 +101,15 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
 
   Widget _buildOfferView(ShowOfferCards state) => state.offers.length > 0
       ? _buildOfferSwipeView(
-          (index) => OfferCard(offer: state.offers[index]),
+          (index) => OfferCard(
+            offer: state.offers[index],
+            onPress: (offer) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(settings: RouteSettings(arguments: offer), builder: (context) => WorkDetailsPage()),
+              );
+            },
+          ),
           state.offers.length,
         )
       : Center(
