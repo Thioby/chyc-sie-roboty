@@ -40,6 +40,7 @@ dependencies:
   firebase_messaging: ^5.1.6
   flutter_tindercard: ^0.1.8
   flutter_local_notifications: ^0.8.3
+  flutter_html: ^0.11.0
 
 dev_dependencies:
   flutter_test:
