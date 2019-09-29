@@ -7,8 +7,9 @@ class LabeledInput extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
+  final ValueChanged<String> onTextChange;
 
-  const LabeledInput({Key key, this.label, this.controller, this.hint}) : super(key: key);
+  const LabeledInput({Key key, this.label, this.controller, this.hint, this.onTextChange,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +23,23 @@ class LabeledInput extends StatelessWidget {
         SizedBox(height: Dimens.M),
         TextField(
           controller: controller,
+          onChanged: onTextChange,
           decoration: InputDecoration(
-            focusedBorder: border(),
-            border: border(),
-            hintText: hint,
-            filled: true,
-            fillColor: AppColors.background
+              focusedBorder: border(),
+              border: border(),
+              enabledBorder: border(),
+              disabledBorder: border(),
+              hintText: hint,
+              filled: true,
+              fillColor: AppColors.backgroundColor
           ),
         )
       ],
     );
   }
 
-  InputBorder border() => OutlineInputBorder(
+  InputBorder border() =>
+      OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(
           width: 0,

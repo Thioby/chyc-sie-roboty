@@ -67,6 +67,11 @@ class AppTypography {
     color: AppColors.twilight,
     fontWeight: FontWeight.bold,
   );
+  static const buttonLight = TextStyle(
+    fontSize: 16,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  );
 
   static const buttonTextStyle = TextStyle(
     fontSize: 12,

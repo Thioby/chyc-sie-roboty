@@ -9,4 +9,6 @@ class Strings {
   static courseCert(BuildContext context) => "Certyfikat";
   static filterSelect(BuildContext context) => "Wybierz";
   static filterInput(BuildContext context) => "Wpisz...";
+  static filterReset(BuildContext context) => "Resetuj";
+  static filterApply(BuildContext context) => "Filtruj";
 }
