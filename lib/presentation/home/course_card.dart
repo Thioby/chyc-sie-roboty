@@ -9,49 +9,57 @@ import 'package:flutter_svg/svg.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
+  final Function (Course) onClick;
 
-  const CourseCard({Key key, @required this.course}) : super(key: key);
+  const CourseCard({Key key, @required this.course, @required this.onClick}) : super(key: key);
+
+  void _onClick() {
+    onClick(course);
+  }
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(Dimens.L),
-        decoration: BoxDecoration(
-          boxShadow: buildShadow(),
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(Dimens.BORDER_RADIUS)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(course.createdBy ?? "", style: AppTypography.offerCompanyTextStyle),
-                SizedBox(width: Dimens.S),
-              ],
-            ),
-            Text(course.name ?? "", style: AppTypography.offerTitleTextStyle),
-            SizedBox(height: Dimens.S),
-            Text(course.courseLocalization ?? "", style: AppTypography.offerLocationTextStyle),
-            SizedBox(height: Dimens.M),
-            AppDivider(),
-            SizedBox(height: Dimens.M),
-            Text('Dodatkowe informacje', style: AppTypography.offerSkillsTextStyle),
-            SizedBox(height: Dimens.S),
-            Expanded(
-              child: Text(
-                course.description ?? "",
-                style: AppTypography.offerLocationTextStyle,
+  Widget build(BuildContext context) => InkWell(
+    onTap: _onClick,
+    child: Container(
+          padding: const EdgeInsets.all(Dimens.L),
+          decoration: BoxDecoration(
+            boxShadow: buildShadow(),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(Dimens.BORDER_RADIUS)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(course.createdBy ?? "", style: AppTypography.offerCompanyTextStyle),
+                  SizedBox(width: Dimens.S),
+                ],
               ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SvgPicture.asset(Images.INFO),
-                SizedBox(width: Dimens.S),
-                Text('Kliknij by zobaczyć więcej informacji', style: AppTypography.offerLabelTextStyle),
-              ],
-            )
-          ],
+              Text(course.name ?? "", style: AppTypography.offerTitleTextStyle),
+              SizedBox(height: Dimens.S),
+              Text(course.courseLocalization ?? "", style: AppTypography.offerLocationTextStyle),
+              SizedBox(height: Dimens.M),
+              AppDivider(),
+              SizedBox(height: Dimens.M),
+              Text('Dodatkowe informacje', style: AppTypography.offerSkillsTextStyle),
+              SizedBox(height: Dimens.S),
+              Expanded(
+                child: Text(
+                  course.description ?? "",
+                  style: AppTypography.offerLocationTextStyle,
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SvgPicture.asset(Images.INFO),
+                  SizedBox(width: Dimens.S),
+                  Text('Kliknij by zobaczyć więcej informacji', style: AppTypography.offerLabelTextStyle),
+                ],
+              )
+            ],
+          ),
         ),
-      );
+  );
 }
