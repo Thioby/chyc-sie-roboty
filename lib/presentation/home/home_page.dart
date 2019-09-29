@@ -50,10 +50,10 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
 
     if (state is ShowLoadingOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
-      return _buildView('Adam', _buildLoadingCardsView());
+      return _buildView('Adam', _buildLoadingCardsView(), "loadingOffer");
     } else if (state is ShowLoadingCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
-      return _buildView('Adam', _buildLoadingCardsView());
+      return _buildView('Adam', _buildLoadingCardsView(), "loadingCourse");
     } else if (state is ShowOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
@@ -65,6 +65,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
           },
           state.offers.length,
         ),
+        SwipeType.OFFER.toString(),
       );
     } else if (state is ShowCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
@@ -77,14 +78,16 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
           },
           state.courses.length,
         ),
+          SwipeType.COURSE.toString(),
       );
     }
 
     return Container();
   }
 
-  Widget _buildView(String userName, Widget contentView) => Scaffold(
+  Widget _buildView(String userName, Widget contentView, String key) => Scaffold(
         backgroundColor: AppColors.backgroundColor,
+        key: Key(key),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
