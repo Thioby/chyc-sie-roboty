@@ -1,7 +1,8 @@
-import 'package:chyc_sie_roboty/presentation/filters/courses/courses_filters_page.dart';
 import 'package:chyc_sie_roboty/domain/data/course.dart';
-import 'package:chyc_sie_roboty/presentation/course_detail/course_detail_page.dart';
-import 'package:chyc_sie_roboty/presentation/course_detail/course_detail_result.dart';
+import 'package:chyc_sie_roboty/presentation/details/course/course_detail_page.dart';
+import 'package:chyc_sie_roboty/presentation/details/detail_result.dart';
+import 'package:chyc_sie_roboty/presentation/details/work/work_details_page.dart';
+import 'package:chyc_sie_roboty/presentation/filters/courses/courses_filters_page.dart';
 import 'package:chyc_sie_roboty/presentation/home/course_card.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_app_bar.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_bloc.dart';
@@ -100,7 +101,10 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
 
   Widget _buildOfferView(ShowOfferCards state) => state.offers.length > 0
       ? _buildOfferSwipeView(
-          (index) => OfferCard(offer: state.offers[index]),
+          (index) => OfferCard(
+            offer: state.offers[index],
+            onPress: this._navigateToDetails,
+          ),
           state.offers.length,
         )
       : Center(
@@ -221,15 +225,23 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
     _handleState(result);
   }
 
-  void _handleState(CourseDetailResult result) {
+  void _navigateToDetails(offer) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute(settings: RouteSettings(arguments: offer), builder: (context) => WorkDetailsPage()),
+    );
+    _handleState(result);
+  }
+
+  void _handleState(DetailResult result) {
     switch (result) {
-      case CourseDetailResult.delete:
+      case DetailResult.delete:
         _cardController.triggerLeft();
         break;
-      case CourseDetailResult.apply:
+      case DetailResult.apply:
         _cardController.triggerRight();
         break;
-      case CourseDetailResult.none:
+      case DetailResult.none:
         break;
     }
   }

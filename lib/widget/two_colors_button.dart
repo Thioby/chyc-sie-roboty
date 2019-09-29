@@ -1,5 +1,4 @@
 import 'package:chyc_sie_roboty/style/app_colors.dart';
-import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +6,23 @@ import 'package:flutter/material.dart';
 class TwoColorsButton extends StatelessWidget {
   final VoidCallback leftClick;
   final VoidCallback rightClick;
-  final String leftText;
-  final String rightText;
+  final Widget leftChild;
+  final Widget rightChild;
+  final Color leftColor;
+  final Color rightColor;
+  final Color leftSplashColor;
+  final Color rightSplashColor;
 
   const TwoColorsButton({
     Key key,
     this.leftClick,
     this.rightClick,
-    this.leftText,
-    this.rightText,
+    this.leftChild,
+    this.rightChild,
+    this.leftColor = AppColors.golden,
+    this.rightColor = AppColors.azure,
+    this.leftSplashColor = AppColors.azure,
+    this.rightSplashColor = AppColors.golden,
   }) : super(key: key);
 
   @override
@@ -24,14 +31,11 @@ class TwoColorsButton extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: MaterialButton(
-            child: Text(
-              leftText,
-              style: AppTypography.buttonLight,
-            ),
+            child: leftChild,
             padding: EdgeInsets.symmetric(vertical: 16),
             onPressed: leftClick,
-            color: AppColors.golden,
-            splashColor: AppColors.azure,
+            color: leftColor,
+            splashColor: leftSplashColor,
             shape: RoundedRectangleBorder(
               side: BorderSide(style: BorderStyle.none),
               borderRadius: BorderRadius.only(
@@ -44,13 +48,10 @@ class TwoColorsButton extends StatelessWidget {
         Expanded(
           child: MaterialButton(
             padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              rightText,
-              style: AppTypography.buttonLight,
-            ),
+            child: rightChild,
             onPressed: rightClick,
-            color: AppColors.azure,
-            splashColor: AppColors.golden,
+            color: rightColor,
+            splashColor: rightSplashColor,
             shape: RoundedRectangleBorder(
               side: BorderSide(style: BorderStyle.none),
               borderRadius: BorderRadius.only(
