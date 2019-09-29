@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:chyc_sie_roboty/domain/auth/user.dart';
+import 'package:chyc_sie_roboty/domain/auth/user_repository.dart';
 import 'package:chyc_sie_roboty/domain/data/course.dart';
 import 'package:chyc_sie_roboty/domain/data/data_repository.dart';
 import 'package:chyc_sie_roboty/domain/data/offer.dart';
@@ -10,10 +12,12 @@ import 'package:rxdart/rxdart.dart';
 
 class HomeBloc extends Bloc {
   final DataRepository _dataRepository;
+  final UserRepository _userRepository;
 
   final BehaviorSubject<HomeState> _stateSubject = BehaviorSubject();
   final PublishSubject<HomeEvent> _eventSubject = PublishSubject();
   StreamSubscription<HomeEvent> _eventSubscription;
+  StreamSubscription<User> _userStateSubscription;
   StreamSubscription<dynamic> _dataSubscription;
 
   SwipeType _swipeType = SwipeType.OFFER;
@@ -21,21 +25,25 @@ class HomeBloc extends Bloc {
   List<Offer> _swipedOffers = [];
   List<Course> _currentCourses = [];
   List<Course> _swipedCourses = [];
+  String _userName = "";
 
   Function(HomeEvent) get dispatch => _eventSubject.sink.add;
 
   Observable<HomeState> get state => _stateSubject.stream;
 
-  HomeBloc(this._dataRepository) {
+  HomeBloc(this._dataRepository, this._userRepository) {
     _eventSubscription = _eventSubject.stream.listen((event) => _mapEventToState(_stateSubject.value, event));
+    _userStateSubscription = _userRepository.userState().listen((user) {
+      _userName = user.name;
+    });
     _loadData();
   }
 
   void _loadData() {
     if (_swipeType == SwipeType.OFFER) {
-      _stateSubject.add(ShowLoadingOfferCards());
+      _stateSubject.add(ShowLoadingOfferCards.from(_userName));
     } else {
-      _stateSubject.add(ShowLoadingCourseCards());
+      _stateSubject.add(ShowLoadingCourseCards.from(_userName));
     }
 
     _dataSubscription?.cancel();
@@ -43,12 +51,12 @@ class HomeBloc extends Bloc {
     if (_swipeType == SwipeType.OFFER) {
       _dataSubscription = _dataRepository.offers().listen((offers) {
         _currentOffers = _filterOffers(offers);
-        _stateSubject.add(ShowOfferCards.from(_currentOffers));
+        _stateSubject.add(ShowOfferCards.from(_currentOffers, _userName));
       });
     } else if (_swipeType == SwipeType.COURSE) {
       _dataSubscription = _dataRepository.courses().listen((courses) {
         _currentCourses = _filterCourses(courses);
-        _stateSubject.add(ShowCourseCards.from(_currentCourses));
+        _stateSubject.add(ShowCourseCards.from(_currentCourses, _userName));
       });
     }
   }
@@ -81,14 +89,14 @@ class HomeBloc extends Bloc {
   Offer _filterOutOffer() {
     final offer = _currentOffers.removeAt(0);
     _swipedOffers.add(offer);
-    _stateSubject.add(ShowOfferCards.from(_currentOffers));
+    _stateSubject.add(ShowOfferCards.from(_currentOffers, _userName));
     return offer;
   }
 
   Course _filterOutCourse() {
     final course = _currentCourses.removeAt(0);
     _swipedCourses.add(course);
-    _stateSubject.add(ShowCourseCards.from(_currentCourses));
+    _stateSubject.add(ShowCourseCards.from(_currentCourses, _userName));
     return course;
   }
 

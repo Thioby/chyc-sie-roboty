@@ -7,11 +7,18 @@ part of 'home_state.dart';
 // **************************************************************************
 
 class _$ShowLoadingOfferCards extends ShowLoadingOfferCards {
+  @override
+  final String userName;
+
   factory _$ShowLoadingOfferCards(
           [void Function(ShowLoadingOfferCardsBuilder) updates]) =>
       (new ShowLoadingOfferCardsBuilder()..update(updates)).build();
 
-  _$ShowLoadingOfferCards._() : super._();
+  _$ShowLoadingOfferCards._({this.userName}) : super._() {
+    if (userName == null) {
+      throw new BuiltValueNullFieldError('ShowLoadingOfferCards', 'userName');
+    }
+  }
 
   @override
   ShowLoadingOfferCards rebuild(
@@ -25,17 +32,19 @@ class _$ShowLoadingOfferCards extends ShowLoadingOfferCards {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ShowLoadingOfferCards;
+    return other is ShowLoadingOfferCards && userName == other.userName;
   }
 
   @override
   int get hashCode {
-    return 946932512;
+    return $jf($jc(0, userName.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('ShowLoadingOfferCards').toString();
+    return (newBuiltValueToStringHelper('ShowLoadingOfferCards')
+          ..add('userName', userName))
+        .toString();
   }
 }
 
@@ -43,7 +52,19 @@ class ShowLoadingOfferCardsBuilder
     implements Builder<ShowLoadingOfferCards, ShowLoadingOfferCardsBuilder> {
   _$ShowLoadingOfferCards _$v;
 
+  String _userName;
+  String get userName => _$this._userName;
+  set userName(String userName) => _$this._userName = userName;
+
   ShowLoadingOfferCardsBuilder();
+
+  ShowLoadingOfferCardsBuilder get _$this {
+    if (_$v != null) {
+      _userName = _$v.userName;
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(ShowLoadingOfferCards other) {
@@ -60,18 +81,25 @@ class ShowLoadingOfferCardsBuilder
 
   @override
   _$ShowLoadingOfferCards build() {
-    final _$result = _$v ?? new _$ShowLoadingOfferCards._();
+    final _$result = _$v ?? new _$ShowLoadingOfferCards._(userName: userName);
     replace(_$result);
     return _$result;
   }
 }
 
 class _$ShowLoadingCourseCards extends ShowLoadingCourseCards {
+  @override
+  final String userName;
+
   factory _$ShowLoadingCourseCards(
           [void Function(ShowLoadingCourseCardsBuilder) updates]) =>
       (new ShowLoadingCourseCardsBuilder()..update(updates)).build();
 
-  _$ShowLoadingCourseCards._() : super._();
+  _$ShowLoadingCourseCards._({this.userName}) : super._() {
+    if (userName == null) {
+      throw new BuiltValueNullFieldError('ShowLoadingCourseCards', 'userName');
+    }
+  }
 
   @override
   ShowLoadingCourseCards rebuild(
@@ -85,17 +113,19 @@ class _$ShowLoadingCourseCards extends ShowLoadingCourseCards {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ShowLoadingCourseCards;
+    return other is ShowLoadingCourseCards && userName == other.userName;
   }
 
   @override
   int get hashCode {
-    return 388429377;
+    return $jf($jc(0, userName.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('ShowLoadingCourseCards').toString();
+    return (newBuiltValueToStringHelper('ShowLoadingCourseCards')
+          ..add('userName', userName))
+        .toString();
   }
 }
 
@@ -103,7 +133,19 @@ class ShowLoadingCourseCardsBuilder
     implements Builder<ShowLoadingCourseCards, ShowLoadingCourseCardsBuilder> {
   _$ShowLoadingCourseCards _$v;
 
+  String _userName;
+  String get userName => _$this._userName;
+  set userName(String userName) => _$this._userName = userName;
+
   ShowLoadingCourseCardsBuilder();
+
+  ShowLoadingCourseCardsBuilder get _$this {
+    if (_$v != null) {
+      _userName = _$v.userName;
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(ShowLoadingCourseCards other) {
@@ -120,7 +162,7 @@ class ShowLoadingCourseCardsBuilder
 
   @override
   _$ShowLoadingCourseCards build() {
-    final _$result = _$v ?? new _$ShowLoadingCourseCards._();
+    final _$result = _$v ?? new _$ShowLoadingCourseCards._(userName: userName);
     replace(_$result);
     return _$result;
   }
@@ -129,13 +171,18 @@ class ShowLoadingCourseCardsBuilder
 class _$ShowOfferCards extends ShowOfferCards {
   @override
   final List<Offer> offers;
+  @override
+  final String userName;
 
   factory _$ShowOfferCards([void Function(ShowOfferCardsBuilder) updates]) =>
       (new ShowOfferCardsBuilder()..update(updates)).build();
 
-  _$ShowOfferCards._({this.offers}) : super._() {
+  _$ShowOfferCards._({this.offers, this.userName}) : super._() {
     if (offers == null) {
       throw new BuiltValueNullFieldError('ShowOfferCards', 'offers');
+    }
+    if (userName == null) {
+      throw new BuiltValueNullFieldError('ShowOfferCards', 'userName');
     }
   }
 
@@ -150,18 +197,21 @@ class _$ShowOfferCards extends ShowOfferCards {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ShowOfferCards && offers == other.offers;
+    return other is ShowOfferCards &&
+        offers == other.offers &&
+        userName == other.userName;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, offers.hashCode));
+    return $jf($jc($jc(0, offers.hashCode), userName.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ShowOfferCards')
-          ..add('offers', offers))
+          ..add('offers', offers)
+          ..add('userName', userName))
         .toString();
   }
 }
@@ -174,11 +224,16 @@ class ShowOfferCardsBuilder
   List<Offer> get offers => _$this._offers;
   set offers(List<Offer> offers) => _$this._offers = offers;
 
+  String _userName;
+  String get userName => _$this._userName;
+  set userName(String userName) => _$this._userName = userName;
+
   ShowOfferCardsBuilder();
 
   ShowOfferCardsBuilder get _$this {
     if (_$v != null) {
       _offers = _$v.offers;
+      _userName = _$v.userName;
       _$v = null;
     }
     return this;
@@ -199,7 +254,8 @@ class ShowOfferCardsBuilder
 
   @override
   _$ShowOfferCards build() {
-    final _$result = _$v ?? new _$ShowOfferCards._(offers: offers);
+    final _$result =
+        _$v ?? new _$ShowOfferCards._(offers: offers, userName: userName);
     replace(_$result);
     return _$result;
   }
@@ -208,13 +264,18 @@ class ShowOfferCardsBuilder
 class _$ShowCourseCards extends ShowCourseCards {
   @override
   final List<Course> courses;
+  @override
+  final String userName;
 
   factory _$ShowCourseCards([void Function(ShowCourseCardsBuilder) updates]) =>
       (new ShowCourseCardsBuilder()..update(updates)).build();
 
-  _$ShowCourseCards._({this.courses}) : super._() {
+  _$ShowCourseCards._({this.courses, this.userName}) : super._() {
     if (courses == null) {
       throw new BuiltValueNullFieldError('ShowCourseCards', 'courses');
+    }
+    if (userName == null) {
+      throw new BuiltValueNullFieldError('ShowCourseCards', 'userName');
     }
   }
 
@@ -229,18 +290,21 @@ class _$ShowCourseCards extends ShowCourseCards {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ShowCourseCards && courses == other.courses;
+    return other is ShowCourseCards &&
+        courses == other.courses &&
+        userName == other.userName;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, courses.hashCode));
+    return $jf($jc($jc(0, courses.hashCode), userName.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ShowCourseCards')
-          ..add('courses', courses))
+          ..add('courses', courses)
+          ..add('userName', userName))
         .toString();
   }
 }
@@ -253,11 +317,16 @@ class ShowCourseCardsBuilder
   List<Course> get courses => _$this._courses;
   set courses(List<Course> courses) => _$this._courses = courses;
 
+  String _userName;
+  String get userName => _$this._userName;
+  set userName(String userName) => _$this._userName = userName;
+
   ShowCourseCardsBuilder();
 
   ShowCourseCardsBuilder get _$this {
     if (_$v != null) {
       _courses = _$v.courses;
+      _userName = _$v.userName;
       _$v = null;
     }
     return this;
@@ -278,7 +347,8 @@ class ShowCourseCardsBuilder
 
   @override
   _$ShowCourseCards build() {
-    final _$result = _$v ?? new _$ShowCourseCards._(courses: courses);
+    final _$result =
+        _$v ?? new _$ShowCourseCards._(courses: courses, userName: userName);
     replace(_$result);
     return _$result;
   }

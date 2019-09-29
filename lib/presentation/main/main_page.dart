@@ -36,14 +36,42 @@ class _MainPageState extends BlocState<MainPage, MainBloc> {
           builder: _builder,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: SvgPicture.asset(Images.INFO), title: Text('XD')),
-            BottomNavigationBarItem(icon: SvgPicture.asset(Images.INFO), title: Text('XD')),
-            BottomNavigationBarItem(icon: SvgPicture.asset(Images.INFO), title: Text('XD')),
-            BottomNavigationBarItem(icon: SvgPicture.asset(Images.INFO), title: Text('XD')),
-          ],
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          child: Stack(
+            children: [
+              SizedBox(child: SvgPicture.asset(Images.BOTTOM_NAVIGATION), height: 56,),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: BottomNavigationBar(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      type: BottomNavigationBarType.fixed,
+                      items: <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: SvgPicture.asset(Images.BOTTOM_HOME_ICON),
+                          title: Text('Oferty'),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: SvgPicture.asset(Images.BOTTOM_MESSAGE_ICON),
+                          title: Text('Wiadomości'),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: SvgPicture.asset(Images.BOTTOM_MAP_ICON),
+                          title: Text('Mapa'),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: SvgPicture.asset(Images.BOTTOM_SETTINGS_ICON),
+                          title: Text('Ustawienia'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
 

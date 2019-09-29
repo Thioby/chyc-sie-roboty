@@ -9,5 +9,7 @@ abstract class UserRepository {
 
   Observable filterCourses(String category, String localization);
 
+  Observable<User> userState();
+
   Observable filterJobs(String localization, String craft, String jobType, int experience);
 }

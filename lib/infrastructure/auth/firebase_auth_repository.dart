@@ -13,7 +13,7 @@ const _USERS_COLLECTION = "users";
 class FirebaseUserRepository implements UserRepository {
   final Firestore _firestore;
   final FirebaseMessaging _firebaseMessaging;
-  final BehaviorSubject userState = BehaviorSubject()..add(User.nonLogged());
+  final BehaviorSubject<User> _userState = BehaviorSubject()..add(User.nonLogged());
 
   FirebaseUserRepository(this._firestore, this._firebaseMessaging);
 
@@ -33,7 +33,7 @@ class FirebaseUserRepository implements UserRepository {
                 document.reference.setData(UserSerializer().toMap(user)).timeout(Duration(seconds: 15)))
             .map((_) => user);
       }).doOnData((user) {
-        userState.add(user);
+        _userState.add(user);
       });
     });
   }
@@ -64,5 +64,10 @@ class FirebaseUserRepository implements UserRepository {
               'jobType': jobType,
               'experience': experience,
             })));
+  }
+
+  @override
+  Observable<User> userState() {
+    return this._userState;;
   }
 }
