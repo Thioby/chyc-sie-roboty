@@ -2,6 +2,7 @@ import 'package:chyc_sie_roboty/presentation/home/home_page.dart';
 import 'package:chyc_sie_roboty/presentation/main/main_bloc.dart';
 import 'package:chyc_sie_roboty/presentation/main/main_event.dart';
 import 'package:chyc_sie_roboty/presentation/main/main_state.dart';
+import 'package:chyc_sie_roboty/presentation/maps/map_view_page.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/images.dart';
 import 'package:chyc_sie_roboty/util/bloc_state.dart';
@@ -16,6 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends BlocState<MainPage, MainBloc> {
   PublishSubject notifierSubject = PublishSubject();
+  int page = 0;
 
   @override
   void dispose() {
@@ -25,12 +27,7 @@ class _MainPageState extends BlocState<MainPage, MainBloc> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: HomePage(
-          swipeTypeCallback: (type) {
-            bloc.dispatch(ChangeSwipeType.from(type));
-          },
-          buttonNotifier: notifierSubject,
-        ),
+        body: changeWidget(page),
         floatingActionButton: StreamBuilder(
           stream: bloc.state,
           builder: _builder,
@@ -40,11 +37,22 @@ class _MainPageState extends BlocState<MainPage, MainBloc> {
           shape: CircularNotchedRectangle(),
           child: Stack(
             children: [
-              SizedBox(child: SvgPicture.asset(Images.BOTTOM_NAVIGATION), height: 56,),
+              SizedBox(
+                child: SvgPicture.asset(Images.BOTTOM_NAVIGATION),
+                height: 56,
+              ),
               Row(
                 children: <Widget>[
                   Expanded(
                     child: BottomNavigationBar(
+                      currentIndex: page,
+                      onTap: (index) {
+                        if (index != page) {
+                          setState(() {
+                            page = index;
+                          });
+                        }
+                      },
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       type: BottomNavigationBarType.fixed,
@@ -94,20 +102,21 @@ class _MainPageState extends BlocState<MainPage, MainBloc> {
 
     return Container();
   }
-}
 
-Widget changeWidget(int page) {
-  switch (page) {
-    case 0:
-      return HomePage(
-        swipeTypeCallback: (type) {},
-      );
-      break;
+  Widget changeWidget(int page) {
+    switch (page) {
+      case 0:
+        return HomePage(
+          swipeTypeCallback: (type) {
+            bloc.dispatch(ChangeSwipeType.from(type));
+          },
+          buttonNotifier: notifierSubject,
+        );
 
-    case 2:
-      return MapViewPage();
-      break;
+      case 2:
+        return MapViewPage();
+    }
+
+    return Container();
   }
-
-  return Container();
 }
