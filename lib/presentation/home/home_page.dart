@@ -93,8 +93,10 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
   }
 
   _onCourseFilterClick() async {
-    final filterResult = Navigator.push(context, MaterialPageRoute(builder: (_) => CoursesFiltersPage()));
-    print(filterResult);
+    final filterResult = await Navigator.push(context, MaterialPageRoute(builder: (_) => CoursesFiltersPage()));
+    if (filterResult) {
+      bloc.dispatch(Reload());
+    }
   }
 
   Function _onOffersFilterClick() {}

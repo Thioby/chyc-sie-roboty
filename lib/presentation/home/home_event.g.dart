@@ -216,4 +216,60 @@ class ChangeDataTypeBuilder
   }
 }
 
+class _$Reload extends Reload {
+  factory _$Reload([void Function(ReloadBuilder) updates]) =>
+      (new ReloadBuilder()..update(updates)).build();
+
+  _$Reload._() : super._();
+
+  @override
+  Reload rebuild(void Function(ReloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ReloadBuilder toBuilder() => new ReloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Reload;
+  }
+
+  @override
+  int get hashCode {
+    return 41971340;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('Reload').toString();
+  }
+}
+
+class ReloadBuilder implements Builder<Reload, ReloadBuilder> {
+  _$Reload _$v;
+
+  ReloadBuilder();
+
+  @override
+  void replace(Reload other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Reload;
+  }
+
+  @override
+  void update(void Function(ReloadBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Reload build() {
+    final _$result = _$v ?? new _$Reload._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

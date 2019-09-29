@@ -19,9 +19,3 @@ abstract class UpdateFilters implements Built<UpdateFilters, UpdateFiltersBuilde
           ..localization = localization,
       );
 }
-
-abstract class ResetFilters implements Built<ResetFilters, ResetFiltersBuilder>, CourseFiltersEvent {
-  ResetFilters._();
-
-  factory ResetFilters([updates(ResetFiltersBuilder b)]) = _$ResetFilters;
-}

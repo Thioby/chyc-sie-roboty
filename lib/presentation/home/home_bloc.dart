@@ -73,6 +73,8 @@ class HomeBloc extends Bloc {
         _swipeType = SwipeType.OFFER;
       }
       _loadData();
+    } else if (event is Reload) {
+      _loadData();
     }
   }
 

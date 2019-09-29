@@ -17,5 +17,8 @@ registerDataModules(Injector injector) async {
     ..registerSingleton<UserRepository>(
         (injector) => FirebaseUserRepository(injector.getDependency(), injector.getDependency()))
     ..registerDependency((injector) => SignInUseCase(injector.getDependency()))
-    ..registerDependency<DataRepository>((injector) => FirebaseDataRepository(injector.getDependency()));
+    ..registerDependency<DataRepository>((injector) => FirebaseDataRepository(
+          injector.getDependency(),
+          injector.getDependency(),
+        ));
 }
