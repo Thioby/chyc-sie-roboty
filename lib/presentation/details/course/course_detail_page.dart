@@ -1,8 +1,12 @@
 import 'package:chyc_sie_roboty/domain/data/course.dart';
 import 'package:chyc_sie_roboty/presentation/details/detail_result.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
+import 'package:chyc_sie_roboty/style/images.dart';
+import 'package:chyc_sie_roboty/widget/two_colors_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CourseDetailPage extends StatefulWidget {
   final Course course;
@@ -39,7 +43,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           IconButton(
             alignment: Alignment.centerLeft,
             icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context, DetailResult.apply),
+            onPressed: () => Navigator.pop(context, DetailResult.none),
           ),
           SizedBox(height: 21),
           Text(
@@ -75,6 +79,30 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
               decoration: const BoxDecoration(color: AppColors.paleGrey57),
             ),
           ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: (course.additionalInfo != null) ? course.additionalInfo.length : 0,
+              itemBuilder: (context, index) {
+                return Html(data: course.additionalInfo[index], shrinkToFit: true,
+                );
+              },),
+          ),
+          TwoColorsButton(
+            leftChild: SvgPicture.asset(Images.CANCEL),
+            rightChild: SvgPicture.asset(Images.HEART),
+            leftClick: () {
+              Navigator.of(context).pop(DetailResult.delete);
+            },
+            rightClick: () {
+              Navigator.of(context).pop(DetailResult.apply);
+            },
+            leftColor: AppColors.cancelColor,
+            leftSplashColor: null,
+            rightSplashColor: null,
+          ),
+          SizedBox(height: 14),
         ],
       );
 }
