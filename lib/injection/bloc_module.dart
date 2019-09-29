@@ -8,6 +8,6 @@ registerBlocModules(Injector injector) {
   injector
     ..registerDependency((injector) => HomeBloc(injector.getDependency()))
     ..registerDependency((injector) => SignInBloc(injector.getDependency()))
-    ..registerDependency((injector) => CourseFiltersBloc())
+    ..registerDependency((injector) => CourseFiltersBloc(injector.getDependency()))
     ..registerDependency((injector) => MainBloc());
 }

@@ -29,3 +29,9 @@ abstract class ChangeDataType implements Built<ChangeDataType, ChangeDataTypeBui
 
   factory ChangeDataType([updates(ChangeDataTypeBuilder b)]) = _$ChangeDataType;
 }
+
+abstract class Reload implements Built<Reload, ReloadBuilder>, HomeEvent {
+  Reload._();
+
+  factory Reload([updates(ReloadBuilder b)]) = _$Reload;
+}
