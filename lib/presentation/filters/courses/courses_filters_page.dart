@@ -91,8 +91,14 @@ class _CoursesFiltersPageState extends BlocState<CoursesFiltersPage, CourseFilte
           Padding(
             padding: const EdgeInsets.all(Dimens.M),
             child: TwoColorsButton(
-              leftText: Strings.filterReset(context),
-              rightText: Strings.filterApply(context),
+              leftChild: Text(
+                Strings.filterReset(context),
+                style: AppTypography.buttonLight,
+              ),
+              rightChild: Text(
+                Strings.filterApply(context),
+                style: AppTypography.buttonLight,
+              ),
               leftClick: () {
                 setState(() {
                   _selected = categories()[0];
