@@ -6,6 +6,7 @@ import 'package:chyc_sie_roboty/presentation/home/home_state.dart';
 import 'package:chyc_sie_roboty/presentation/home/offer_card.dart';
 import 'package:chyc_sie_roboty/presentation/home/swipe_type.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
+import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/images.dart';
 import 'package:chyc_sie_roboty/util/bloc_state.dart';
@@ -58,32 +59,42 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
       widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
         'Adam',
-        _buildOfferSwipeView(
-          (index) {
-            print('offer index = $index');
-            return OfferCard(offer: state.offers[index]);
-          },
-          state.offers.length,
-        ),
+        _buildOfferView(state),
         SwipeType.OFFER.toString(),
       );
     } else if (state is ShowCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
       return _buildView(
         'Adam',
-        _buildOfferSwipeView(
-          (index) {
-            print('course index = $index');
-            return CourseCard(course: state.courses[index]);
-          },
-          state.courses.length,
-        ),
-          SwipeType.COURSE.toString(),
+        _buildCourseView(state),
+        SwipeType.COURSE.toString(),
       );
     }
 
     return Container();
   }
+
+  Widget _buildOfferView(ShowOfferCards state) => state.offers.length > 0
+      ? _buildOfferSwipeView(
+          (index) => OfferCard(offer: state.offers[index]),
+          state.offers.length,
+        )
+      : Center(
+          child: Text(
+          'Na tą chwilę nie mamy dla Ciebie więcej ofert pracy.',
+          style: AppTypography.offerLabelTextStyle,
+        ));
+
+  Widget _buildCourseView(ShowCourseCards state) => state.courses.length > 0
+      ? _buildOfferSwipeView(
+          (index) => CourseCard(course: state.courses[index]),
+          state.courses.length,
+        )
+      : Center(
+          child: Text(
+          'Na tą chwilę nie mamy dla Ciebie więcej kursów.',
+          style: AppTypography.offerLabelTextStyle,
+        ));
 
   Widget _buildView(String userName, Widget contentView, String key) => Scaffold(
         backgroundColor: AppColors.backgroundColor,

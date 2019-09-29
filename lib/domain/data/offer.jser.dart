@@ -19,6 +19,7 @@ abstract class _$OfferSerializer implements Serializer<Offer> {
     setMapValue(ret, 'place', model.place);
     setMapValue(ret, 'requiredSkills',
         codeIterable(model.requiredSkills, (val) => val as String));
+    setMapValue(ret, 'timestamp', model.timestamp);
     return ret;
   }
 
@@ -26,7 +27,7 @@ abstract class _$OfferSerializer implements Serializer<Offer> {
   Offer fromMap(Map map) {
     if (map == null) return null;
     final obj = Offer(
-        map['id'] as String ?? getJserDefault('id'),
+        getJserDefault('id'),
         codeIterable<String>(
                 map['benefits'] as Iterable, (val) => val as String) ??
             getJserDefault('benefits'),
@@ -35,7 +36,9 @@ abstract class _$OfferSerializer implements Serializer<Offer> {
         map['place'] as String ?? getJserDefault('place'),
         codeIterable<String>(
                 map['requiredSkills'] as Iterable, (val) => val as String) ??
-            getJserDefault('requiredSkills'));
+            getJserDefault('requiredSkills'),
+        map['timestamp'] as int ?? getJserDefault('timestamp'));
+    obj.id = map['id'] as String;
     return obj;
   }
 }

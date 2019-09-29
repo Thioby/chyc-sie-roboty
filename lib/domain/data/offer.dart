@@ -9,6 +9,7 @@ class Offer {
   final String offerName;
   final String place;
   final List<String> requiredSkills;
+  final int timestamp;
 
   Offer(
     this.id,
@@ -17,6 +18,7 @@ class Offer {
     this.offerName,
     this.place,
     this.requiredSkills,
+    this.timestamp,
   );
 }
 
