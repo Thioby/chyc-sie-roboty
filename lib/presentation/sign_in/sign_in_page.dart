@@ -2,7 +2,6 @@ import 'package:chyc_sie_roboty/presentation/main/main_page.dart';
 import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_bloc.dart';
 import 'package:chyc_sie_roboty/presentation/sign_in/sign_in_state.dart';
 import 'package:chyc_sie_roboty/util/bloc_state.dart';
-import 'package:chyc_sie_roboty/widget/bottom_info.dart';
 import 'package:chyc_sie_roboty/widget/filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,12 +22,6 @@ class _SignInState extends BlocState<SignInPage, SignInBloc> {
   void _signIn() {
     bloc.dispatch(SignInEvent.SignIn);
   }
-
-//  void _show() {
-//    showModalBottomSheet(context: context, builder: (BuildContext bc) {
-//      return BottomInfo();
-//    }, isScrollControlled: true, backgroundColor: Colors.transparent);
-//  }
 
   void _navigate(String name) {
     if (name == "Home") {

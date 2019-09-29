@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
@@ -18,11 +20,23 @@ class HomeAppBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(top: 30, bottom: 47, left: Dimens.L, right: Dimens.L),
               color: AppColors.azure,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Witaj $userName!', style: AppTypography.appBarTitleTextStyle),
-                  Text('Wybrane dla Ciebie na dziś:', style: AppTypography.appBarSubtitleTextStyle),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Witaj $userName!', style: AppTypography.appBarTitleTextStyle),
+                        Text('Wybrane dla Ciebie na dziś:', style: AppTypography.appBarSubtitleTextStyle),
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    Images.AVATAR,
+                    width: 34,
+                    height: 34,
+                  ),
                 ],
               ),
             ),

@@ -10,6 +10,7 @@ import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/images.dart';
 import 'package:chyc_sie_roboty/util/bloc_state.dart';
+import 'package:chyc_sie_roboty/widget/bottom_info.dart';
 import 'package:chyc_sie_roboty/widget/image_round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -140,6 +141,7 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
                         bloc.dispatch(Discard.from(index));
                       } else {
                         bloc.dispatch(Accept.from(index));
+                        _showAcceptedOfferBottomSheet();
                       }
                     }
                   },
@@ -158,13 +160,36 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
   Row _buildCardControlsRow() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          RoundImageButton(image: SvgPicture.asset(Images.CANCEL), onTap: () => _cardController?.triggerLeft()),
+          RoundImageButton(
+            image: SvgPicture.asset(Images.CANCEL),
+            onTap: () => _cardController?.triggerLeft(),
+            text: "Następny",
+          ),
           SizedBox(width: 48),
-          RoundImageButton(image: SvgPicture.asset(Images.REVERT), onTap: () {}),
+          RoundImageButton(
+            image: SvgPicture.asset(Images.REVERT),
+            onTap: () {},
+            text: "Cofnij",
+          ),
           SizedBox(width: 48),
-          RoundImageButton(image: SvgPicture.asset(Images.HEART), onTap: () => _cardController?.triggerRight()),
+          RoundImageButton(
+            image: SvgPicture.asset(Images.HEART),
+            onTap: () => _cardController?.triggerRight(),
+            text: "ChyćSie",
+          ),
         ],
       );
 
   Center _buildLoadingCardsView() => Center(child: CircularProgressIndicator());
+
+  void _showAcceptedOfferBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return BottomInfo();
+      },
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+    );
+  }
 }

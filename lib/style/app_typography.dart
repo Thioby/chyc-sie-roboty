@@ -52,4 +52,11 @@ class AppTypography {
     color: AppColors.azure,
     fontWeight: FontWeight.w700,
   );
+
+  static const buttonTextStyle = TextStyle(
+    fontSize: 12,
+    color: AppColors.lightBlueGrey,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5,
+  );
 }

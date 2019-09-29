@@ -7,4 +7,5 @@ class Images {
   static const HEART = "images/ic_heart.svg";
   static const STARS = "images/ic_stars.svg";
   static const BOTTOM_INFO_ICON = "images/bottom_info_icon.svg";
+  static const AVATAR = "images/avatar.png";
 }
