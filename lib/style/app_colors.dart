@@ -11,7 +11,8 @@ class AppColors {
   static const Color twilight10 = Color(0x1A4b5184);
   static const Color golden = Color(0xfff8cb00);
   static const Color disabled = Color(0xFFf4f4f4);
+  static const Color lightBlueGrey = Color(0xffc9cbdb);
+  static const Color cancelColor = Color(0xfff73a3a);
   static const Color darkBlueGrey = Color(0xFF27225c);
-  static const Color lightBlueGrey = Color(0xFFc9cbdb);
   static const Color paleGrey57 = Color(0x91edeef3);
 }

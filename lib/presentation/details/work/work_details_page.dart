@@ -1,10 +1,11 @@
 import 'package:chyc_sie_roboty/domain/data/offer.dart';
+import 'package:chyc_sie_roboty/presentation/details/detail_result.dart';
 import 'package:chyc_sie_roboty/style/app_colors.dart';
 import 'package:chyc_sie_roboty/style/app_typography.dart';
 import 'package:chyc_sie_roboty/style/dimens.dart';
 import 'package:chyc_sie_roboty/style/images.dart';
 import 'package:chyc_sie_roboty/widget/app_divider.dart';
-import 'package:chyc_sie_roboty/widget/two_type_buttton.dart';
+import 'package:chyc_sie_roboty/widget/two_colors_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -86,7 +87,19 @@ class WorkDetailsPage extends StatelessWidget {
                         )
                       : Container(),
                 ),
-                TwoTypeButton(),
+                TwoColorsButton(
+                  leftChild: SvgPicture.asset(Images.CANCEL),
+                  rightChild: SvgPicture.asset(Images.HEART),
+                  leftClick: () {
+                    Navigator.of(context).pop(DetailResult.delete);
+                  },
+                  rightClick: () {
+                    Navigator.of(context).pop(DetailResult.apply);
+                  },
+                  leftColor: AppColors.cancelColor,
+                  leftSplashColor: null,
+                  rightSplashColor: null,
+                ),
               ],
             ),
           ),
