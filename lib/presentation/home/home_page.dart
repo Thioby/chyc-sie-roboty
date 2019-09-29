@@ -1,3 +1,4 @@
+import 'package:chyc_sie_roboty/presentation/filters/courses/courses_filters_page.dart';
 import 'package:chyc_sie_roboty/presentation/home/course_card.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_app_bar.dart';
 import 'package:chyc_sie_roboty/presentation/home/home_bloc.dart';
@@ -52,16 +53,27 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
 
     if (state is ShowLoadingOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
-      return _buildView('Adam', _buildLoadingCardsView(), "loadingOffer");
+      return _buildView(
+        'Adam',
+        _buildLoadingCardsView(),
+        "loadingOffer",
+        _onOffersFilterClick,
+      );
     } else if (state is ShowLoadingCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
-      return _buildView('Adam', _buildLoadingCardsView(), "loadingCourse");
+      return _buildView(
+        'Adam',
+        _buildLoadingCardsView(),
+        "loadingCourse",
+        _onCourseFilterClick,
+      );
     } else if (state is ShowOfferCards) {
       widget.swipeTypeCallback(SwipeType.OFFER);
       return _buildView(
         'Adam',
         _buildOfferView(state),
         SwipeType.OFFER.toString(),
+        _onOffersFilterClick,
       );
     } else if (state is ShowCourseCards) {
       widget.swipeTypeCallback(SwipeType.COURSE);
@@ -69,11 +81,19 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
         'Adam',
         _buildCourseView(state),
         SwipeType.COURSE.toString(),
+        _onCourseFilterClick,
       );
     }
 
     return Container();
   }
+
+  _onCourseFilterClick() async {
+    final filterResult = Navigator.push(context, MaterialPageRoute(builder: (_) => CoursesFiltersPage()));
+    print(filterResult);
+  }
+
+  Function _onOffersFilterClick() {}
 
   Widget _buildOfferView(ShowOfferCards state) => state.offers.length > 0
       ? _buildOfferSwipeView(
@@ -97,14 +117,14 @@ class _HomePageState extends BlocState<HomePage, HomeBloc> {
           style: AppTypography.offerLabelTextStyle,
         ));
 
-  Widget _buildView(String userName, Widget contentView, String key) => Scaffold(
+  Widget _buildView(String userName, Widget contentView, String key, Function onFilterClick) => Scaffold(
         backgroundColor: AppColors.backgroundColor,
         key: Key(key),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              HomeAppBar(userName: userName),
+              HomeAppBar(userName: userName, onFilterClick: onFilterClick),
               Expanded(child: contentView),
             ],
           ),

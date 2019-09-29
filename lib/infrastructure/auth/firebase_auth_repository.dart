@@ -37,4 +37,7 @@ class FirebaseUserRepository implements UserRepository {
       });
     });
   }
+
+  @override
+  Observable filterCourses(String category, String localization) {}
 }
