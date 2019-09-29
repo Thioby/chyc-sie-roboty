@@ -25,20 +25,21 @@ class CourseCard extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text("JCGroup", style: AppTypography.offerCompanyTextStyle),
+                Text(course.createdBy ?? "", style: AppTypography.offerCompanyTextStyle),
                 SizedBox(width: Dimens.S),
               ],
             ),
-            Text('Kierunek - Aktywizacja', style: AppTypography.offerTitleTextStyle),
+            Text(course.name ?? "", style: AppTypography.offerTitleTextStyle),
             SizedBox(height: Dimens.S),
-            Text('Katowice, woj. Śląskie, Polska', style: AppTypography.offerLocationTextStyle),
+            Text(course.courseLocalization ?? "", style: AppTypography.offerLocationTextStyle),
             SizedBox(height: Dimens.M),
             AppDivider(),
             SizedBox(height: Dimens.M),
             Text('Dodatkowe informacje', style: AppTypography.offerSkillsTextStyle),
+            SizedBox(height: Dimens.S),
             Expanded(
               child: Text(
-                '30 osób biernych zawodowo znajdujących się w szczególnej sytuacji na rynku pracy – wyłącznie osoby w wieku 50 lat i więcej, o niskich kwalifikacjach, zamieszkujących obszar woj. lubuskiego.',
+                course.description ?? "",
                 style: AppTypography.offerLocationTextStyle,
               ),
             ),
