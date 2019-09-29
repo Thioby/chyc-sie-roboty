@@ -9,6 +9,7 @@ class Course {
   final String description;
   final String name;
   final String createdBy;
+  final int timestamp;
 
   Course(
     this.courseLocalization,
@@ -16,6 +17,7 @@ class Course {
     this.description,
     this.name,
     this.createdBy,
+    this.timestamp,
   );
 }
 

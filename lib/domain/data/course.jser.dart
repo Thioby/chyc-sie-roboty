@@ -17,6 +17,7 @@ abstract class _$CourseSerializer implements Serializer<Course> {
     setMapValue(ret, 'description', model.description);
     setMapValue(ret, 'name', model.name);
     setMapValue(ret, 'createdBy', model.createdBy);
+    setMapValue(ret, 'timestamp', model.timestamp);
     return ret;
   }
 
@@ -29,7 +30,8 @@ abstract class _$CourseSerializer implements Serializer<Course> {
         map['courseType'] as String ?? getJserDefault('courseType'),
         map['description'] as String ?? getJserDefault('description'),
         map['name'] as String ?? getJserDefault('name'),
-        map['createdBy'] as String ?? getJserDefault('createdBy'));
+        map['createdBy'] as String ?? getJserDefault('createdBy'),
+        map['timestamp'] as int ?? getJserDefault('timestamp'));
     obj.id = map['id'] as String;
     return obj;
   }

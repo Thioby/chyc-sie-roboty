@@ -10,12 +10,12 @@ class FirebaseDataRepository extends DataRepository {
   FirebaseDataRepository(this._firestore);
 
   @override
-  Observable<List<Offer>> offers() =>
-      Observable(_firestore.collection('works').snapshots()).flatMap((offers) => Observable.just(
-          offers.documents.map((doc) => OfferSerializer().fromMap(doc.data)..id = doc.documentID).toList()));
+  Observable<List<Offer>> offers() => Observable(_firestore.collection('works').snapshots()).flatMap((offers) =>
+      Observable.just(offers.documents.map((doc) => OfferSerializer().fromMap(doc.data)..id = doc.documentID).toList()
+        ..sort((a, b) => a.timestamp.compareTo(b.timestamp))));
 
   @override
-  Observable<List<Course>> courses() =>
-      Observable(_firestore.collection('courses').snapshots()).flatMap((courses) => Observable.just(
-          courses.documents.map((doc) => CourseSerializer().fromMap(doc.data)..id = doc.documentID).toList()));
+  Observable<List<Course>> courses() => Observable(_firestore.collection('courses').snapshots()).flatMap((courses) =>
+      Observable.just(courses.documents.map((doc) => CourseSerializer().fromMap(doc.data)..id = doc.documentID).toList()
+        ..sort((a, b) => a.timestamp.compareTo(b.timestamp))));
 }
